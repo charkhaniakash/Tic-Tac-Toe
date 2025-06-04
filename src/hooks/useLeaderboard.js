@@ -29,7 +29,6 @@ export function useLeaderboard() {
       playerData.totalGames += 1;
       playerData.wins += 1;
 
-      // Check for streak rewards
       if (STREAK_REWARDS[playerData.currentStreak]) {
         const bonus = STREAK_REWARDS[playerData.currentStreak];
         playerData.points += bonus;
@@ -45,7 +44,6 @@ export function useLeaderboard() {
     setPlayers(prevPlayers => {
       const newPlayers = new Map(prevPlayers);
       
-      // Update winner's data
       const winnerData = newPlayers.get(winner) || {
         username: winner,
         points: 0,
@@ -56,11 +54,9 @@ export function useLeaderboard() {
         winsVsPlayers: 0
       };
 
-      // Add points based on game mode
       const pointsEarned = gameMode === 'single' ? POINTS.AI_WIN : POINTS.MULTIPLAYER_WIN;
       winnerData.points += pointsEarned;
       
-      // Update statistics
       winnerData.currentStreak += 1;
       winnerData.totalGames += 1;
       winnerData.wins += 1;
@@ -70,7 +66,6 @@ export function useLeaderboard() {
         winnerData.winsVsPlayers += 1;
       }
 
-      // Check for streak rewards
       if (STREAK_REWARDS[winnerData.currentStreak]) {
         const bonus = STREAK_REWARDS[winnerData.currentStreak];
         winnerData.points += bonus;

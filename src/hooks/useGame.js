@@ -48,7 +48,7 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
       const timer = setTimeout(() => {
         const aiMove = getAIMove(board);
         handleMove(aiMove);
-      }, 500); // Add slight delay for better UX
+      }, 500);
 
       return () => clearTimeout(timer);
     }
