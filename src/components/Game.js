@@ -1,0 +1,104 @@
+import React, { memo, useState } from 'react';
+import PropTypes from 'prop-types';
+import Board from './Board';
+import { useGame } from '../hooks/useGame';
+
+const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer }) {
+  if (gameOver) {
+    if (winner) {
+      return <h2 className="game-status winner">🎉 Winner: {winner}! 🎉</h2>;
+    }
+    return <h2 className="game-status draw">It's a draw! 🤝</h2>;
+  }
+  return <h2 className="game-status">Current player: {currentPlayer}'s turn (${currentPlayer === 'AI' ? 'O' : 'X'})</h2>;
+});
+
+const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
+  const [player2Name, setPlayer2Name] = useState(gameMode === 'multiplayer' ? '' : 'AI');
+
+  const {
+    board,
+    winner,
+    gameOver,
+    handleMove,
+    resetGame,
+    currentPlayer,
+    isXNext
+  } = useGame({
+    username,
+    player2Name,
+    gameMode,
+    onGameEnd: null
+  });
+
+  if (gameMode === 'multiplayer' && !player2Name) {
+    return (
+      <div className="game-setup">
+        <h2>Player 2 Setup</h2>
+        <input
+          type="text"
+          placeholder="Enter Player 2 name"
+          value={player2Name}
+          onChange={(e) => setPlayer2Name(e.target.value)}
+        />
+        <button 
+          onClick={() => setPlayer2Name(player2Name)}
+          disabled={!player2Name.trim()}
+        >
+          Start Game
+        </button>
+        <p className="game-instructions">
+          Player 1 ({username}) will play as X<br />
+          Player 2 will play as O
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="game">
+      <GameStatus 
+        winner={winner ? (winner === 'X' ? username : player2Name) : null}
+        gameOver={gameOver}
+        currentPlayer={currentPlayer}
+      />
+      
+      {!gameOver && (
+        <p className="game-instructions">
+          {gameMode === 'single' 
+            ? "Click any empty square to make your move. The AI will respond automatically."
+            : "Take turns clicking empty squares to make your moves."}
+        </p>
+      )}
+
+      <div className="game-board">
+        <Board 
+          squares={board} 
+          onSquareClick={handleMove}
+          isClickable={!gameOver && (gameMode === 'multiplayer' || isXNext)}
+        />
+      </div>
+
+      <div className="game-controls">
+        <button onClick={resetGame}>New Game</button>
+        <button onClick={onBackToMenu}>Back to Menu</button>
+      </div>
+
+      <div className="game-info">
+        <p>Playing as:</p>
+        <ul>
+          <li>{username}: X</li>
+          <li>{player2Name}: O</li>
+        </ul>
+      </div>
+    </div>
+  );
+});
+
+Game.propTypes = {
+  username: PropTypes.string.isRequired,
+  gameMode: PropTypes.oneOf(['single', 'multiplayer']).isRequired,
+  onBackToMenu: PropTypes.func.isRequired
+};
+
+export default Game; 
