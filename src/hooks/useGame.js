@@ -33,15 +33,15 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
       if (currentWinner) {
         const isPlayer1Winner = currentWinner === 'X';
         if (isPlayer1Winner) {
-          recordGame(username, player2Name);
+          recordGame(username, player2Name === '' ? 'AI' : player2Name, gameMode);
         } else {
-          recordGame(player2Name, username);
+          recordGame(player2Name === '' ? 'AI' : player2Name, username, gameMode);
         }
       }
 
       onGameEnd?.(currentWinner);
     }
-  }, [board, username, player2Name, recordGame, onGameEnd]);
+  }, [board, username, player2Name, gameMode, recordGame, onGameEnd]);
 
   useEffect(() => {
     if (!isXNext && gameMode === 'single' && !gameOver) {
@@ -68,6 +68,6 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
     gameOver,
     handleMove,
     resetGame,
-    currentPlayer: isXNext ? username : player2Name
+    currentPlayer: isXNext ? username : player2Name || 'AI'
   };
 } 

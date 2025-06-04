@@ -1,8 +1,13 @@
 import { useState, useCallback, useMemo } from 'react';
 
 const STREAK_REWARDS = {
-  3: 5,  // 3 wins = 5 bonus points
-  5: 10  // 5 wins = 10 bonus points
+  3: 5,  
+  5: 10  
+};
+
+const POINTS = {
+  MULTIPLAYER_WIN: 2,  
+  AI_WIN: 1          
 };
 
 export function useLeaderboard() {
@@ -36,7 +41,7 @@ export function useLeaderboard() {
     });
   }, []);
 
-  const recordGame = useCallback((winner, loser) => {
+  const recordGame = useCallback((winner, loser, gameMode) => {
     setPlayers(prevPlayers => {
       const newPlayers = new Map(prevPlayers);
       
@@ -46,33 +51,50 @@ export function useLeaderboard() {
         points: 0,
         currentStreak: 0,
         totalGames: 0,
-        wins: 0
+        wins: 0,
+        winsVsAI: 0,
+        winsVsPlayers: 0
       };
+
+      // Add points based on game mode
+      const pointsEarned = gameMode === 'single' ? POINTS.AI_WIN : POINTS.MULTIPLAYER_WIN;
+      winnerData.points += pointsEarned;
+      
+      // Update statistics
       winnerData.currentStreak += 1;
       winnerData.totalGames += 1;
       winnerData.wins += 1;
-      winnerData.points += 1; // Base point for winning
+      if (gameMode === 'single') {
+        winnerData.winsVsAI += 1;
+      } else {
+        winnerData.winsVsPlayers += 1;
+      }
 
       // Check for streak rewards
       if (STREAK_REWARDS[winnerData.currentStreak]) {
         const bonus = STREAK_REWARDS[winnerData.currentStreak];
         winnerData.points += bonus;
-        alert(`🎉 Congratulations ${winner}! You've won ${winnerData.currentStreak} games in a row and earned ${bonus} bonus points!`);
+        alert(`🎉 Congratulations ${winner}! You've won ${winnerData.currentStreak} games in a row and earned ${bonus} bonus points!\n\nPoints breakdown:\n- ${pointsEarned} points for winning${gameMode === 'single' ? ' against AI' : ''}\n- ${bonus} bonus points for ${winnerData.currentStreak} wins streak`);
+      } else {
+        alert(`🎮 ${winner} wins! +${pointsEarned} points${gameMode === 'single' ? ' for beating AI' : ' for beating another player'}!`);
       }
 
-      // Update loser's data
-      const loserData = newPlayers.get(loser) || {
-        username: loser,
-        points: 0,
-        currentStreak: 0,
-        totalGames: 0,
-        wins: 0
-      };
-      loserData.currentStreak = 0;
-      loserData.totalGames += 1;
+      if (loser !== 'AI') {
+        const loserData = newPlayers.get(loser) || {
+          username: loser,
+          points: 0,
+          currentStreak: 0,
+          totalGames: 0,
+          wins: 0,
+          winsVsAI: 0,
+          winsVsPlayers: 0
+        };
+        loserData.currentStreak = 0;
+        loserData.totalGames += 1;
+        newPlayers.set(loser, loserData);
+      }
 
       newPlayers.set(winner, winnerData);
-      newPlayers.set(loser, loserData);
       return newPlayers;
     });
   }, []);
@@ -83,7 +105,8 @@ export function useLeaderboard() {
       .map((player, index) => ({
         ...player,
         rank: index + 1,
-        winRate: player.totalGames ? ((player.wins / player.totalGames) * 100).toFixed(1) : '0.0'
+        winRate: player.totalGames ? ((player.wins / player.totalGames) * 100).toFixed(1) : '0.0',
+        winsBreakdown: `vs Players: ${player.winsVsPlayers} | vs AI: ${player.winsVsAI}`
       }));
   }, [players]);
 

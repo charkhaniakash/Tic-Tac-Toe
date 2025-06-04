@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import Board from './Board';
 import { useGame } from '../hooks/useGame';
 
-const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer }) {
+const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer, gameMode, username, player2Name }) {
   if (gameOver) {
     if (winner) {
-      return <h2 className="game-status winner">🎉 Winner: {winner}! 🎉</h2>;
+      const winnerName = winner === 'X' ? username : (gameMode === 'single' ? 'AI' : player2Name);
+      return <h2 className="game-status winner">🎉 Winner: {winnerName}! 🎉</h2>;
     }
     return <h2 className="game-status draw">It's a draw! 🤝</h2>;
   }
@@ -70,9 +71,12 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
   return (
     <div className="game">
       <GameStatus 
-        winner={winner ? (winner === 'X' ? username : player2Name) : null}
+        winner={winner}
         gameOver={gameOver}
         currentPlayer={currentPlayer}
+        gameMode={gameMode}
+        username={username}
+        player2Name={player2Name}
       />
       
       {!gameOver && (
@@ -111,6 +115,15 @@ Game.propTypes = {
   username: PropTypes.string.isRequired,
   gameMode: PropTypes.oneOf(['single', 'multiplayer']).isRequired,
   onBackToMenu: PropTypes.func.isRequired
+};
+
+GameStatus.propTypes = {
+  winner: PropTypes.oneOf(['X', 'O', null]),
+  gameOver: PropTypes.bool.isRequired,
+  currentPlayer: PropTypes.string.isRequired,
+  gameMode: PropTypes.oneOf(['single', 'multiplayer']).isRequired,
+  username: PropTypes.string.isRequired,
+  player2Name: PropTypes.string.isRequired
 };
 
 export default Game; 

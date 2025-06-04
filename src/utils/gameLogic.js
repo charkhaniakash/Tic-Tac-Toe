@@ -7,7 +7,7 @@ export function checkWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
 
   for (let i = 0; i < lines.length; i++) {
@@ -20,27 +20,28 @@ export function checkWinner(squares) {
 }
 
 export function getAIMove(squares) {
-  // Check for winning move
-  const winningMove = findWinningMove(squares, 'O');
-  if (winningMove !== -1) return winningMove;
+  const move = findWinningMove(squares, 'O');
+  if (move !== -1) return move;
 
-  // Block player's winning move
-  const blockingMove = findWinningMove(squares, 'X');
-  if (blockingMove !== -1) return blockingMove;
+  const blockMove = findWinningMove(squares, 'X');
+  if (blockMove !== -1) return blockMove;
 
-  // Take center if available
-  if (!squares[4]) return 4;
+  if (squares[4] === null) return 4;
 
-  // Take corners
   const corners = [0, 2, 6, 8];
-  const availableCorners = corners.filter(i => !squares[i]);
+  const availableCorners = corners.filter(i => squares[i] === null);
   if (availableCorners.length > 0) {
     return availableCorners[Math.floor(Math.random() * availableCorners.length)];
   }
 
-  // Take any available space
-  const availableSpaces = squares.map((square, i) => !square ? i : null).filter(i => i !== null);
-  return availableSpaces[Math.floor(Math.random() * availableSpaces.length)];
+  const sides = [1, 3, 5, 7];
+  const availableSides = sides.filter(i => squares[i] === null);
+  if (availableSides.length > 0) {
+    return availableSides[Math.floor(Math.random() * availableSides.length)];
+  }
+
+  const availableSquares = squares.map((square, i) => square === null ? i : null).filter(i => i !== null);
+  return availableSquares[Math.floor(Math.random() * availableSquares.length)];
 }
 
 function findWinningMove(squares, player) {
@@ -52,15 +53,15 @@ function findWinningMove(squares, player) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
 
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    const squares2 = squares.slice();
-    if (squares2[a] === player && squares2[b] === player && !squares2[c]) return c;
-    if (squares2[a] === player && !squares2[b] && squares2[c] === player) return b;
-    if (!squares2[a] && squares2[b] === player && squares2[c] === player) return a;
+    const squaresCopy = [...squares];
+    if (squares[a] === null && squares[b] === player && squares[c] === player) return a;
+    if (squares[a] === player && squares[b] === null && squares[c] === player) return b;
+    if (squares[a] === player && squares[b] === player && squares[c] === null) return c;
   }
   return -1;
 } 
