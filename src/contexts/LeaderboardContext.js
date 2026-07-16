@@ -7,7 +7,7 @@ export function LeaderboardProvider({ children }) {
   const leaderboardState = useLeaderboard();
 
   return (
-    <LeaderboardContext.Provider value={leaderboardState}>
+    <LeaderboardContext.Provider value={null}>
       {children}
     </LeaderboardContext.Provider>
   );
