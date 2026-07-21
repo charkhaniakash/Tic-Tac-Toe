@@ -46,7 +46,7 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
   useEffect(() => {
     if (!isXNext && gameMode === 'single' && !gameOver) {
       const timer = setTimeout(() => {
-        const aiMove = getAIMove(board);
+        const aiMove = getAIMove([...board].reverse());
         handleMove(aiMove);
       }, 500);
 
