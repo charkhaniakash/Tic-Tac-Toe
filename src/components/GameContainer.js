@@ -1,8 +1,8 @@
-import React, { useState, memo } from 'react';
+`import React, { useState, memo } from 'react';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
 
-const LoginSection = memo(function LoginSection({ username, onUsernameChange, onGameStart, onShowLeaderboard }) {
+const LoginSection = memo(function LoginSection({ username, onUsernameChange, onGameStart }) {
   return (
     <div className="app">
       <h1>Tic Tac Toe</h1>
@@ -25,7 +25,6 @@ const LoginSection = memo(function LoginSection({ username, onUsernameChange, on
 const GameContainer = memo(function GameContainer() {
   const [username, setUsername] = useState('');
   const [gameStarted, setGameStarted] = useState(false);
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [gameMode, setGameMode] = useState(null);
 
   const handleStartGame = (mode) => {
@@ -35,31 +34,21 @@ const GameContainer = memo(function GameContainer() {
     }
     setGameMode(mode);
     setGameStarted(true);
-    setShowLeaderboard(false);
   };
 
   const handleBackToMenu = () => {
     setGameStarted(false);
     setGameMode(null);
-    setShowLeaderboard(false);
   };
 
   return (
     <>
-      {!gameStarted && !showLeaderboard ? (
+      {!gameStarted ? (
         <LoginSection
           username={username}
           onUsernameChange={setUsername}
           onGameStart={handleStartGame}
-          onShowLeaderboard={() => setShowLeaderboard(true)}
         />
-      ) : showLeaderboard ? (
-        <div className="app">
-          <Leaderboard />
-          <button className="back-button" onClick={handleBackToMenu}>
-            Back to Menu
-          </button>
-        </div>
       ) : (
         <div className="app">
           <Game
