@@ -1,18 +1,15 @@
 # React Tic-Tac-Toe Game
 
-A modern implementation of the classic Tic-Tac-Toe game with React, featuring single-player and multiplayer modes, leaderboard system, and win streak rewards.
+A modern implementation of the classic Tic-Tac-Toe game with React, featuring single-player mode, leaderboard system, and win streak rewards.
 
 ## Features
 
-- 🎮 Two game modes:
-  - Single-player against AI
-  - Two-player local multiplayer
-- 🤖 Smart AI opponent that:
-  - Takes winning moves when available
-  - Blocks opponent's winning moves
-  - Makes strategic moves
+- 🎮 Single-player against AI:
+  - Smart AI opponent that:
+    - Takes winning moves when available
+    - Blocks opponent's winning moves
+    - Makes strategic moves
 - 🏆 Point-based leaderboard system:
-  - +2 points for winning against another player
   - +1 point for winning against AI
 - ⭐ Win streak rewards:
   - +5 bonus points for 3 consecutive wins
@@ -46,13 +43,9 @@ A modern implementation of the classic Tic-Tac-Toe game with React, featuring si
 ## How to Play
 
 1. Enter your username when prompted
-2. Choose a game mode:
-   - Single Player: Play against the AI
-   - Multiplayer: Play against another person
-3. In multiplayer mode, Player 2 will need to enter their name
-4. Click on any empty square to make your move
-5. The game will automatically detect wins, losses, and draws
-6. View the leaderboard to track your progress and compete with others
+2. Click on any empty square to make your move
+3. The game will automatically detect wins, losses, and draws
+4. View the leaderboard to track your progress
 
 ## Code Structure
 
