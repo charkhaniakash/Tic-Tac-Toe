@@ -16,7 +16,6 @@ const LoginSection = memo(function LoginSection({ username, onUsernameChange, on
       </div>
       <div className="menu-buttons">
         <button onClick={() => onGameStart('single')}>Single Player</button>
-        <button onClick={() => onGameStart('multiplayer')}>Multiplayer</button>
         <button onClick={onShowLeaderboard}>View Leaderboard</button>
       </div>
     </div>
@@ -74,4 +73,4 @@ const GameContainer = memo(function GameContainer() {
   );
 });
 
-export default GameContainer; 
+export default GameContainer;

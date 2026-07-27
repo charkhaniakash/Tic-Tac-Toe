@@ -15,8 +15,8 @@ const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer, g
 });
 
 const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
-  const [player2Name, setPlayer2Name] = useState('');
-  const [isPlayer2Ready, setIsPlayer2Ready] = useState(false);
+  // const [player2Name, setPlayer2Name] = useState('');
+  // const [isPlayer2Ready, setIsPlayer2Ready] = useState(false);
 
   const {
     board,
@@ -28,45 +28,45 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
     isXNext
   } = useGame({
     username,
-    player2Name: gameMode === 'multiplayer' ? (isPlayer2Ready ? player2Name : '') : 'AI',
-    gameMode,
+    player2Name: 'AI',
+    gameMode: 'single',
     onGameEnd: null
   });
 
-  const handlePlayer2Submit = (e) => {
-    e.preventDefault();
-    if (player2Name.trim()) {
-      setIsPlayer2Ready(true);
-    }
-  };
+  // const handlePlayer2Submit = (e) => {
+  //   e.preventDefault();
+  //   if (player2Name.trim()) {
+  //     setIsPlayer2Ready(true);
+  //   }
+  // };
 
-  if (gameMode === 'multiplayer' && !isPlayer2Ready) {
-    return (
-      <div className="game-setup">
-        <h2>Player 2 Setup</h2>
-        <form onSubmit={handlePlayer2Submit}>
-          <input
-            type="text"
-            placeholder="Enter Player 2 name"
-            value={player2Name}
-            onChange={(e) => setPlayer2Name(e.target.value)}
-            minLength={2}
-            required
-          />
-          <button 
-            type="submit"
-            disabled={!player2Name.trim() || player2Name.trim().length < 2}
-          >
-            Start Game
-          </button>
-        </form>
-        <p className="game-instructions">
-          Player 1 ({username}) will play as X<br />
-          Player 2 will play as O
-        </p>
-      </div>
-    );
-  }
+  // if (gameMode === 'multiplayer' && !isPlayer2Ready) {
+  //   return (
+  //     <div className="game-setup">
+  //       <h2>Player 2 Setup</h2>
+  //       <form onSubmit={handlePlayer2Submit}>
+  //         <input
+  //           type="text"
+  //           placeholder="Enter Player 2 name"
+  //           value={player2Name}
+  //           onChange={(e) => setPlayer2Name(e.target.value)}
+  //           minLength={2}
+  //           required
+  //         />
+  //         <button 
+  //           type="submit"
+  //           disabled={!player2Name.trim() || player2Name.trim().length < 2}
+  //         >
+  //           Start Game
+  //         </button>
+  //       </form>
+  //       <p className="game-instructions">
+  //         Player 1 ({username}) will play as X<br />
+  //         Player 2 will play as O
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="game">
@@ -74,16 +74,14 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
         winner={winner}
         gameOver={gameOver}
         currentPlayer={currentPlayer}
-        gameMode={gameMode}
+        gameMode="single"
         username={username}
-        player2Name={player2Name}
+        player2Name="AI"
       />
       
       {!gameOver && (
         <p className="game-instructions">
-          {gameMode === 'single' 
-            ? "Click any empty square to make your move. The AI will respond automatically."
-            : "Take turns clicking empty squares to make your moves."}
+          Click any empty square to make your move. The AI will respond automatically.
         </p>
       )}
 
@@ -91,7 +89,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
         <Board 
           squares={board} 
           onSquareClick={handleMove}
-          isClickable={!gameOver && (gameMode === 'multiplayer' || isXNext)}
+          isClickable={!gameOver && isXNext}
         />
       </div>
 
@@ -104,12 +102,12 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
         <p>Playing as:</p>
         <ul>
           <li>{username}: X</li>
-          <li>{isPlayer2Ready ? player2Name : 'AI'}: O</li>
+          <li>AI: O</li>
         </ul>
       </div>
     </div>
   );
-});
+};
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
