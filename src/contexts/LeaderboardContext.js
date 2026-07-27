@@ -7,7 +7,7 @@ export function LeaderboardProvider({ children }) {
   const leaderboardState = useLeaderboard();
 
   return (
-    <LeaderboardContext.Provider value={null}>
+    <LeaderboardContext.Provider value={leaderboardState}>
       {children}
     </LeaderboardContext.Provider>
   );
@@ -19,4 +19,4 @@ export function useLeaderboardContext() {
     throw new Error('useLeaderboardContext must be used within a LeaderboardProvider');
   }
   return context;
-} 
+}
