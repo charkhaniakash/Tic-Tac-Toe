@@ -7,14 +7,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Added for vertical centering */
+  gap: 20px; /* Added gap for better spacing between sections */
 }
 
-.login-section {
+.header {
+  font-size: 3em;
+  margin-bottom: 30px;
+  color: #2e7d32;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-section,
+.game-setup {
   margin: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  width: 100%; /* Occupy full width available within its container */
+  max-width: 400px; /* Consistent max-width for input sections */
 }
 
 .login-section input,
@@ -23,7 +36,8 @@
   font-size: 16px;
   border: 2px solid #4CAF50;
   border-radius: 8px;
-  width: 250px;
+  width: 100%; /* Make input fields take available width */
+  max-width: 300px; /* Max width for input fields */
   transition: border-color 0.3s;
 }
 
@@ -40,37 +54,39 @@
   gap: 12px;
   max-width: 300px;
   margin: 20px auto;
+  width: 100%; /* Take available width */
 }
 
 .menu-buttons button,
 .game-controls button,
 .back-button {
-  padding: 12px 24px;
+  padding: 14px 28px; /* Slightly increased padding */
   font-size: 16px;
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px; /* Slightly increased border-radius */
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out; /* Smoother transition */
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 .menu-buttons button:hover,
 .game-controls button:hover,
 .back-button:hover {
   background-color: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px); /* More pronounced lift */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .menu-buttons button:active,
 .game-controls button:active,
 .back-button:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reset shadow on active */
 }
 
 button:disabled {
@@ -301,7 +317,7 @@ button:disabled {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.leaderboard th,
+.leaderboard th, 
 .leaderboard td {
   padding: 12px;
   text-align: left;
@@ -331,4 +347,4 @@ button:disabled {
   50% {
     transform: scale(1.05);
   }
-} 
+}
