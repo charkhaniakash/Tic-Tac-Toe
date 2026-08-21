@@ -38,7 +38,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
   //   if (player2Name.trim()) {
   //     setIsPlayer2Ready(true);
   //   }
-  // };
+  // });
 
   // if (gameMode === 'multiplayer' && !isPlayer2Ready) {
   //   return (
@@ -94,7 +94,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
 
       <div className="game-controls">
-        <button onClick={resetGame}>New Game</button>,
+        <button onClick={resetGame}>New Game</button>
         <button onClick={onBackToMenu}>Back to Menu</button>
       </div>
 
@@ -107,7 +107,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
     </div>
   );
-};
+});
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
