@@ -16,6 +16,7 @@ const LoginSection = memo(function LoginSection({ username, onUsernameChange, on
       </div>
       <div className="menu-buttons">
         <button onClick={() => onGameStart('single')}>Single Player</button>
+        <button onClick={() => onGameStart('multi')}>Multiplayer</button>
         <button onClick={onShowLeaderboard}>View Leaderboard</button>
       </div>
     </div>
