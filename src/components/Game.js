@@ -14,9 +14,7 @@ const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer, g
   return <h2 className="game-status">Current player: {currentPlayer}'s turn ({currentPlayer === 'AI' ? 'O' : 'X'})</h2>;
 });
 
-const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
-  // const [player2Name, setPlayer2Name] = useState('');
-  // const [isPlayer2Ready, setIsPlayer2Ready] = useState(false);
+const Game = memo(function Game({ username, onBackToMenu }) {
 
   const {
     board,
@@ -32,41 +30,6 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
     gameMode: 'single',
     onGameEnd: null
   });
-
-  // const handlePlayer2Submit = (e) => {
-  //   e.preventDefault();
-  //   if (player2Name.trim()) {
-  //     setIsPlayer2Ready(true);
-  //   }
-  // };
-
-  // if (gameMode === 'multiplayer' && !isPlayer2Ready) {
-  //   return (
-  //     <div className="game-setup">
-  //       <h2>Player 2 Setup</h2>
-  //       <form onSubmit={handlePlayer2Submit}>
-  //         <input
-  //           type="text"
-  //           placeholder="Enter Player 2 name"
-  //           value={player2Name}
-  //           onChange={(e) => setPlayer2Name(e.target.value)}
-  //           minLength={2}
-  //           required
-  //         />
-  //         <button 
-  //           type="submit"
-  //           disabled={!player2Name.trim() || player2Name.trim().length < 2}
-  //         >
-  //           Start Game
-  //         </button>
-  //       </form>
-  //       <p className="game-instructions">
-  //         Player 1 ({username}) will play as X<br />
-  //         Player 2 will play as O
-  //       </p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="game">
@@ -107,11 +70,10 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
     </div>
   );
-};
+});
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
-  gameMode: PropTypes.oneOf(['single', 'multiplayer']).isRequired,
   onBackToMenu: PropTypes.func.isRequired
 };
 

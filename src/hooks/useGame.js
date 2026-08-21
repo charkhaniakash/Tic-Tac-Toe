@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { checkWinner, getAIMove } from '../utils/gameLogic';
+import { checkWinner, getAIMove } from '../utils/gameHelpers';
 import { useLeaderboardContext } from '../contexts/LeaderboardContext';
 
 export function useGame({ username, player2Name, gameMode, onGameEnd }) {
@@ -33,20 +33,20 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
       if (currentWinner) {
         const isPlayer1Winner = currentWinner === 'X';
         if (isPlayer1Winner) {
-          recordGame(username, player2Name === '' ? 'AI' : player2Name, gameMode);
+          recordGame(username, 'AI', 'single');
         } else {
-          recordGame(player2Name === '' ? 'AI' : player2Name, username, gameMode);
+          recordGame('AI', username, 'single');
         }
       }
 
       onGameEnd?.(currentWinner);
     }
-  }, [board, username, player2Name, gameMode, recordGame, onGameEnd]);
+  }, [board, username, recordGame, onGameEnd]);
 
   useEffect(() => {
     if (!isXNext && gameMode === 'single' && !gameOver) {
       const timer = setTimeout(() => {
-        const aiMove = getAIMove([...board].reverse());
+        const aiMove = getAIMove(board);
         handleMove(aiMove);
       }, 500);
 
@@ -68,6 +68,6 @@ export function useGame({ username, player2Name, gameMode, onGameEnd }) {
     gameOver,
     handleMove,
     resetGame,
-    currentPlayer: isXNext ? username : player2Name || 'AI'
+    currentPlayer: isXNext ? username : 'AI'
   };
 } 
