@@ -69,7 +69,11 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
   // }
 
   return (
-    <div className="game">
+    <main className="game">
+      <div className="game-heading">
+        <span className="eyebrow">Solo match</span>
+        <h1>Tic-Tac-Toe</h1>
+      </div>
       <GameStatus 
         winner={winner}
         gameOver={gameOver}
@@ -94,7 +98,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
 
       <div className="game-controls">
-        <button onClick={resetGame}>New Game</button>,
+        <button onClick={resetGame}>New Game</button>
         <button onClick={onBackToMenu}>Back to Menu</button>
       </div>
 
@@ -105,9 +109,9 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
           <li>AI: O</li>
         </ul>
       </div>
-    </div>
+    </main>
   );
-};
+});
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
