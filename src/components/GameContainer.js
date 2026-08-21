@@ -64,7 +64,6 @@ const GameContainer = memo(function GameContainer() {
         <div className="app">
           <Game
             username={username}
-            gameMode={gameMode}
             onBackToMenu={handleBackToMenu}
           />
         </div>
