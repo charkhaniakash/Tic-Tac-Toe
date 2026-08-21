@@ -9,6 +9,7 @@ const LeaderboardRow = memo(function LeaderboardRow({ player }) {
       <td>{player.points}</td>
       <td>{player.currentStreak}</td>
       <td>{player.winRate}%</td>
+      <td>{player.wins}</td>
       <td>{player.winsBreakdown}</td>
       <td>{player.totalGames}</td>
     </tr>
@@ -56,7 +57,8 @@ const Leaderboard = memo(function Leaderboard() {
             <th>Points</th>
             <th>Current Streak</th>
             <th>Win Rate</th>
-            <th>Wins</th>
+            <th>Total Wins</th>
+            <th>Wins Breakdown</th>
             <th>Games</th>
           </tr>
         </thead>
@@ -70,4 +72,4 @@ const Leaderboard = memo(function Leaderboard() {
   );
 });
 
-export default Leaderboard; 
+export default Leaderboard;
