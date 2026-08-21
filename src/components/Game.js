@@ -15,8 +15,8 @@ const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer, g
 });
 
 const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
-  // const [player2Name, setPlayer2Name] = useState('');
-  // const [isPlayer2Ready, setIsPlayer2Ready] = useState(false);
+  const [player2Name, setPlayer2Name] = useState('');
+  const [isPlayer2Ready, setIsPlayer2Ready] = useState(false);
 
   const {
     board,
@@ -28,8 +28,8 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
     isXNext
   } = useGame({
     username,
-    player2Name: 'AI',
-    gameMode: 'single',
+    player2Name: gameMode === 'single' ? 'AI' : player2Name,
+    gameMode: gameMode,
     onGameEnd: null
   });
 
@@ -74,9 +74,9 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
         winner={winner}
         gameOver={gameOver}
         currentPlayer={currentPlayer}
-        gameMode="single"
+        gameMode={gameMode}
         username={username}
-        player2Name="AI"
+        player2Name={gameMode === 'single' ? 'AI' : player2Name}
       />
       
       {!gameOver && (
@@ -94,7 +94,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
 
       <div className="game-controls">
-        <button onClick={resetGame}>New Game</button>,
+        <button onClick={resetGame}>New Game</button>
         <button onClick={onBackToMenu}>Back to Menu</button>
       </div>
 
