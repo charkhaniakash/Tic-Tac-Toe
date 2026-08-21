@@ -165,11 +165,6 @@ button:disabled {
   animation: celebrate 1s ease-in-out infinite;
 }
 
-.game-status.draw {
-  background: #fff3e0;
-  color: #ef6c00;
-}
-
 .game-instructions {
   margin: 15px 0;
   color: #666;

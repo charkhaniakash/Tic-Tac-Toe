@@ -9,7 +9,7 @@ const GameStatus = memo(function GameStatus({ winner, gameOver, currentPlayer, g
       const winnerName = winner === 'X' ? username : (gameMode === 'single' ? 'AI' : player2Name);
       return <h2 className="game-status winner">🎉 Winner: {winnerName}! 🎉</h2>;
     }
-    return <h2 className="game-status draw">It's a draw! 🤝</h2>;
+    return <h2 className="game-status">Game Over!</h2>;
   }
   return <h2 className="game-status">Current player: {currentPlayer}'s turn ({currentPlayer === 'AI' ? 'O' : 'X'})</h2>;
 });
@@ -38,7 +38,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
   //   if (player2Name.trim()) {
   //     setIsPlayer2Ready(true);
   //   }
-  // };
+  // });
 
   // if (gameMode === 'multiplayer' && !isPlayer2Ready) {
   //   return (
@@ -94,7 +94,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
 
       <div className="game-controls">
-        <button onClick={resetGame}>New Game</button>,
+        <button onClick={resetGame}>New Game</button>
         <button onClick={onBackToMenu}>Back to Menu</button>
       </div>
 
@@ -107,7 +107,7 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
       </div>
     </div>
   );
-};
+});
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
@@ -124,4 +124,4 @@ GameStatus.propTypes = {
   player2Name: PropTypes.string.isRequired
 };
 
-export default Game; 
+export default Game;
