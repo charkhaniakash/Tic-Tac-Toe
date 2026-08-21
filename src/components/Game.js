@@ -33,13 +33,6 @@ const Game = memo(function Game({ username, gameMode, onBackToMenu }) {
     onGameEnd: null
   });
 
-  // const handlePlayer2Submit = (e) => {
-  //   e.preventDefault();
-  //   if (player2Name.trim()) {
-  //     setIsPlayer2Ready(true);
-  //   }
-  // };
-
   // if (gameMode === 'multiplayer' && !isPlayer2Ready) {
   //   return (
   //     <div className="game-setup">
