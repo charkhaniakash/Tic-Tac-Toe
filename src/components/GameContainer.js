@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
+import ThemeToggle from './ThemeToggle'; // Import ThemeToggle
 
 const LoginSection = memo(function LoginSection({ username, onUsernameChange, onGameStart, onShowLeaderboard }) {
   return (
@@ -18,6 +19,7 @@ const LoginSection = memo(function LoginSection({ username, onUsernameChange, on
         <button onClick={() => onGameStart('single')}>Single Player</button>
         <button onClick={onShowLeaderboard}>View Leaderboard</button>
       </div>
+      <ThemeToggle /> {/* Render ThemeToggle within LoginSection */}
     </div>
   );
 });
