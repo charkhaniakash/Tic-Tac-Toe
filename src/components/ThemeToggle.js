@@ -1,13 +1,10 @@
 import React from 'react';
 // Assuming useTheme hook is defined elsewhere, e.g., in src/hooks/useTheme.js
-// import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../hooks/useTheme';
 
 const ThemeToggle = () => {
   // Placeholder for the useTheme hook. This will need to be implemented.
-  const theme = 'light'; // Replace with actual theme from useTheme
-  const toggleTheme = () => {
-    console.log('Theme toggled!'); // Replace with actual toggleTheme from useTheme
-  };
+  const { theme, toggleTheme } = useTheme(); // Replace with actual theme from useTheme
 
   return (
     <button onClick={toggleTheme} style={{
