@@ -21,7 +21,7 @@
 .game-setup input {
   padding: 12px;
   font-size: 16px;
-  border: 2px solid #4CAF50;
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   width: 250px;
   transition: border-color 0.3s;
@@ -30,8 +30,8 @@
 .login-section input:focus,
 .game-setup input:focus {
   outline: none;
-  border-color: #45a049;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  border-color: var(--primary-hover-color);
+  box-shadow: 0 0 5px var(--primary-shadow);
 }
 
 .menu-buttons {
@@ -47,8 +47,8 @@
 .back-button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -61,9 +61,9 @@
 .menu-buttons button:hover,
 .game-controls button:hover,
 .back-button:hover {
-  background-color: #45a049;
+  background-color: var(--primary-hover-color);
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px var(--shadow-medium);
 }
 
 .menu-buttons button:active,
@@ -74,7 +74,7 @@
 }
 
 button:disabled {
-  background-color: #cccccc;
+  background-color: var(--disabled-bg);
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none !important;
@@ -90,9 +90,9 @@ button:disabled {
 .game-info {
   margin: 20px 0;
   padding: 15px;
-  background-color: #f8f8f8;
+  background-color: var(--secondary-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow-light);
 }
 
 .game-info ul {
@@ -115,9 +115,9 @@ button:disabled {
 .board {
   display: inline-block;
   padding: 10px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-light);
 }
 
 .board-row {
@@ -127,27 +127,27 @@ button:disabled {
 .square {
   width: 80px;
   height: 80px;
-  border: 2px solid #4CAF50;
+  border: 2px solid var(--primary-color);
   font-size: 40px;
   font-weight: bold;
   margin: 4px;
   padding: 0;
   text-align: center;
-  background: #fff;
+  background: var(--card-bg);
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s;
-  color: #333;
+  color: var(--text-color);
 }
 
 .square:hover:not(:disabled) {
-  background: #e8f5e9;
+  background: var(--success-bg);
   transform: scale(1.05);
 }
 
 .square:disabled {
   cursor: not-allowed;
-  background: #f5f5f5;
+  background: var(--disabled-bg);
 }
 
 .game-status {
@@ -155,24 +155,24 @@ button:disabled {
   margin: 20px 0;
   padding: 10px 20px;
   border-radius: 8px;
-  background: #f8f8f8;
-  color: #333;
+  background: var(--secondary-bg);
+  color: var(--text-color);
 }
 
 .game-status.winner {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: var(--success-bg);
+  color: var(--success-color);
   animation: celebrate 1s ease-in-out infinite;
 }
 
 .game-status.draw {
-  background: #fff3e0;
-  color: #ef6c00;
+  background: var(--warning-bg);
+  color: var(--warning-color);
 }
 
 .game-instructions {
   margin: 15px 0;
-  color: #666;
+  color: var(--secondary-text-color);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -180,9 +180,9 @@ button:disabled {
 .game-setup {
   margin: 20px;
   padding: 20px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-light);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,7 +202,7 @@ button:disabled {
 .game-setup input {
   padding: 12px;
   font-size: 16px;
-  border: 2px solid #4CAF50;
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   width: 100%;
   max-width: 300px;
@@ -211,19 +211,19 @@ button:disabled {
 
 .game-setup input:focus {
   outline: none;
-  border-color: #45a049;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  border-color: var(--primary-hover-color);
+  box-shadow: 0 0 5px var(--primary-shadow);
 }
 
 .game-setup input:invalid {
-  border-color: #ff5722;
+  border-color: var(--error-color);
 }
 
 .game-setup button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -236,13 +236,13 @@ button:disabled {
 }
 
 .game-setup button:hover:not(:disabled) {
-  background-color: #45a049;
+  background-color: var(--primary-hover-color);
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px var(--shadow-medium);
 }
 
 .game-setup button:disabled {
-  background-color: #cccccc;
+  background-color: var(--disabled-bg);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -251,23 +251,23 @@ button:disabled {
 .leaderboard {
   margin: 20px auto;
   max-width: 800px;
-  background: #fff;
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-light);
 }
 
 .points-info {
-  background: #f8f8f8;
+  background: var(--secondary-bg);
   padding: 15px;
   margin: 15px 0;
   border-radius: 8px;
-  border-left: 4px solid #4CAF50;
+  border-left: 4px solid var(--primary-color);
 }
 
 .points-info h3 {
   margin: 0 0 10px 0;
-  color: #2e7d32;
+  color: var(--success-color);
 }
 
 .points-info ul {
@@ -281,14 +281,14 @@ button:disabled {
 
 .points-info li {
   padding: 5px 10px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--shadow-light);
 }
 
 .no-games {
   text-align: center;
-  color: #666;
+  color: var(--secondary-text-color);
   font-style: italic;
   margin: 20px 0;
 }
@@ -297,31 +297,31 @@ button:disabled {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px var(--shadow-light);
 }
 
 .leaderboard th,
 .leaderboard td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .leaderboard th {
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
   font-weight: bold;
   text-transform: uppercase;
   font-size: 14px;
 }
 
 .leaderboard tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--alternate-row-bg);
 }
 
 .leaderboard tr:hover {
-  background-color: #f5f5f5;
+  background-color: var(--hover-bg);
 }
 
 @keyframes celebrate {
@@ -331,4 +331,4 @@ button:disabled {
   50% {
     transform: scale(1.05);
   }
-} 
+}
